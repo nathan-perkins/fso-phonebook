@@ -43,6 +43,14 @@ const App = () => {
     setNewNumber('')
   }
 
+  const removePerson = (event) => {
+    personService
+      .remove(event.target.id)
+      .then(() => {
+        setPersons(persons)
+      })
+  }
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
@@ -73,7 +81,7 @@ const App = () => {
 
       <h3>Numbers</h3>
 
-      <Persons personsToShow={personsToShow} />
+      <Persons personsToShow={personsToShow} onClick={removePerson} />
     </div>
   )
 }

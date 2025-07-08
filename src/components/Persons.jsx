@@ -1,5 +1,5 @@
 import Person from './Person'
 
-const Persons = ({ personsToShow }) => <div>{personsToShow.map((person) => <Person key={person.name} person={person} />)}</div>
+const Persons = ({ personsToShow, onClick }) => <div>{personsToShow.map((person) => <Person key={person.name} person={person} onClick={onClick} />)}</div>
 
 export default Persons
