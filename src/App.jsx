@@ -3,12 +3,15 @@ import personService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
+import './index.css'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [successMessage, setSuccessMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -37,6 +40,12 @@ const App = () => {
         .create(personObject)
         .then(response => {
           setPersons(persons.concat(response.data))
+          setSuccessMessage(
+            `${personObject.name} was successfully added!`
+          )
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 5000)
         })
     }
     setNewName('')
@@ -80,6 +89,8 @@ const App = () => {
       />
 
       <h3>Numbers</h3>
+
+      <Notification message={successMessage} />
 
       <Persons personsToShow={personsToShow} onClick={removePerson} />
     </div>
